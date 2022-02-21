@@ -19,7 +19,20 @@ namespace task_8_3_1
                     sw.WriteLine("Иван");
                 }
             }
-            // Откроем файл и прочитаем его содержимое
+
+            var fileInfo = new FileInfo(filePath2);
+
+            if (File.Exists(filePath2)) // Проверим, существует ли файл по данному пути
+            {
+
+                using (StreamWriter sw2 = fileInfo.AppendText())
+                {
+                    sw2.WriteLine($"// Время последнего запуска: {DateTime.Now}");
+                    sw2.WriteLine($"// Время последнего запуска: {fileInfo.LastAccessTime}");
+                }
+            }
+
+            //Откроем файл и прочитаем его содержимое
             using (StreamReader sr1 = File.OpenText(filePath1))
             {
                 string str1 = "";
@@ -38,7 +51,9 @@ namespace task_8_3_1
                 {
                     Console.WriteLine(str2);
                 }
-            }
+            }     
+
+            Console.ReadKey();
         }
     }
 }
